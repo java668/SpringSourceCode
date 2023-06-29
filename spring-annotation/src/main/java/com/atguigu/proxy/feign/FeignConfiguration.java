@@ -1,7 +1,7 @@
 package com.atguigu.proxy.feign;
 
+import com.atguigu.proxy.feign.annotation.EnableFeignClients;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 
 /**
  * @author Jerry.chen
@@ -9,7 +9,11 @@ import org.springframework.context.annotation.Import;
  * @date 2023/06/29 18:32
  **/
 @Configuration
-@Import(FeignClientsRegistrar.class)
+@EnableFeignClients(
+        basePackages = {
+            "com.atguigu.proxy.api"
+        }
+)
 public class FeignConfiguration {
 
 

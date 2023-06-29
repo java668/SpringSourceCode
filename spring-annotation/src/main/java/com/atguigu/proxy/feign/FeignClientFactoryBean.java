@@ -9,25 +9,22 @@ import java.lang.reflect.Proxy;
  * @desc
  * @date 2023/06/29 18:33
  **/
-public class FeignClientFactoryBean<T> implements FactoryBean<T> {
+public class FeignClientFactoryBean implements FactoryBean<Object> {
 
     private String url;
 
     private String name;
 
-    private Class<T> type;
+    private String path;
 
-    public FeignClientFactoryBean(String url, String name, Class<T> type) {
-        this.url = url;
-        this.name = name;
-        this.type = type;
-    }
+    private Class<?> type;
+
 
     @Override
-    public T getObject() throws Exception {
+    public Object getObject() throws Exception {
         Target.HardCodedTarget target = new Target.HardCodedTarget(type, url, name);
-        Object o = Proxy.newProxyInstance(target.getClass().getClassLoader(), Target.HardCodedTarget.class.getInterfaces(), new FeignInvocationHandler(target));
-        return (T) o;
+        Object o = Proxy.newProxyInstance(type.getClassLoader(), new Class<?>[] {type}, new FeignInvocationHandler(target));
+        return o;
     }
 
     @Override
@@ -48,13 +45,27 @@ public class FeignClientFactoryBean<T> implements FactoryBean<T> {
         this.url = url;
     }
 
-    public Class<T> getType() {
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public Class<?> getType() {
         return type;
     }
 
-    public void setType(Class<T> type) {
+    public void setType(Class<?> type) {
         this.type = type;
     }
-
-
 }

@@ -42,9 +42,9 @@ public interface Target<T> {
             return null;
         }
 
-        public String apply(String requestTemplet) {
+        public String apply(String requestTemplate) {
             System.out.println();
-            return requestTemplet;
+            return requestTemplate;
         }
     }
 

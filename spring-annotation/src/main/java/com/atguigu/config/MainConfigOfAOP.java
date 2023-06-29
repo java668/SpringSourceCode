@@ -2,6 +2,7 @@ package com.atguigu.config;
 
 
 
+import com.atguigu.aop.TestBeanPostProcessor;
 import org.aopalliance.aop.Advice;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.springframework.aop.Advisor;
@@ -9,6 +10,7 @@ import org.springframework.aop.Pointcut;
 import org.springframework.aop.framework.AopInfrastructureBean;
 import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessor;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
@@ -193,6 +195,7 @@ import com.atguigu.aop.MathCalculator;
  */
 @EnableAspectJAutoProxy
 @Configuration
+@ComponentScan({"com.atguigu.aop"})
 public class MainConfigOfAOP {
 	 
 	//业务逻辑类加入容器中
@@ -206,5 +209,11 @@ public class MainConfigOfAOP {
 	public LogAspects logAspects(){
 		return new LogAspects();
 	}
+
+//	@Bean
+//	public TestBeanPostProcessor testBeanPostProcessor(){
+//		return new TestBeanPostProcessor();
+//	}
+
 }
 

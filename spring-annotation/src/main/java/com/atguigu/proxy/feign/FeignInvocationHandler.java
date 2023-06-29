@@ -14,9 +14,9 @@ public class FeignInvocationHandler implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        System.out.println("增强方法");
+        System.out.println("===========" + method.getName());
         //调用被代理类的实例对象通过反射执行目标方法
-        Object result = method.invoke(target, args);
-        return result;
+//        Object result = method.invoke(target, args);
+        return "success";
     }
 }
